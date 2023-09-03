@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardless Cash Vending Machine</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mali&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div><h1>Cardless Cash Vending Machine</h1></div>
+    <hr>
+    <br>
+    <h1>เลือกจำนวนเงินที่ต้องการ</h1>
+    <input type="text" id="num" value="0">
+      <br>
+      <br>
+    <button class="btn btn-primary" onclick="addNum('+100')" oncontextmenu="addNum('-100')">100</button>
+    <button class="btn btn-primary" onclick="addNum('+500')" oncontextmenu="addNum('-500')">500</button>
+    <button class="btn btn-primary" onclick="addNum('+1000')" oncontextmenu="addNum('-1000')">1000</button>
+    <button class="btn btn-primary" onclick="addNum('+5000')" oncontextmenu="addNum('-5000')">5000</button>
+    <br>
+    <button1 class="btn btn-success" onclick="checkout()">ถอนเงิน</button1>
+
+    <br>
+    <button1 class="btn btn-danger" onclick="clearr()">เคลียร์ค่า</button1>
+    <hr>
+    <div class="history"><h1>ประวัติการถอนเงิน</h1>
+    <ul id="history"></ul>
+    </div>
+    <hr>
+        <h1>ยอดเงินหลังถอน</h1>
+        <br>
+            <div3 class="alert alert-primary" role="alert">เงินในกระเป๋า : $<span id="wallet">0</span></div3>
+            <div3 class="alert alert-warning" role="alert">เงินคงเหลือ : <span id="bank">$20000</span></div3>
+<script>
+    function addNum(op){
+        let length=op.length
+        let opn =op.substring(0,1)
+        let opv =op.substring(1,length)
+        let qty =document.getElementById('num')
+        let val_qty = parseInt(qty.value)
+        if(opn ==="+"){
+            val_qty+= parseInt(opv)
+        }else if(opn ==="-"){
+            if(qty.value>=parseInt(opv)){
+                val_qty-=parseInt(opv)
+            }else{
+
+            }
+        }
+        qty.value = val_qty
+    }
+
+    function checkout(){
+        let qty = document.getElementById('num')
+        let val_qty = parseInt(qty.value)
+        let cart = document.getElementById('wallet')
+        let val_cart = parseInt(cart.innerText)
+        let history = document.getElementById('history')
+        let bank = document.getElementById('bank')
+        let val_bank = parseInt(bank.innerText)
+        cart.innerHTML = val_cart+val_qty
+        bank.innerHTML = val_bank-val_qty
+
+        let li = document.createElement('li');
+        li.innerHTML="ทำรายการเบิกถอนจำนวน $" + val_qty
+        history.appendChild(li);
+        val_qty=0
+        qty.value=val_qty
+    }
+    function clear(){
+         let qty = document.getElementById('num')
+         let val_qty = parseInt(qty.value)
+    }
+    function clearr(){
+        document.getElementById('num').value=0;
+    }
+
+</script>
+<footer>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    66309010007 : Ratchanon Kansawat
+</footer>
+</body>
+</html>
